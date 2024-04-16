@@ -37,6 +37,31 @@ class DatabaseSeeder extends Seeder
             if(!$kayit->exists){
                 Category::create($category);
             } else {
+                $this->command->error('Kayıt bulunmaktadır.');
+            }
+        }
+
+        $tags = [
+            ['tag_name'=>'Dil Eğitimi'],
+            ['tag_name'=>'Futbol'],
+            ['tag_name'=>'Basketbol'],
+            ['tag_name'=>'Diyet'],
+            ['tag_name'=>'Koşu'],
+            ['tag_name'=>'Uzay'],
+            ['tag_name'=>'Nasa']
+        ];
+
+        // VAR KONTROL (firstOrNew)
+
+        foreach ($tags as $tag) {
+
+
+            $kayit = Tag::firstOrNew($tag);
+
+
+            if(!$kayit->exists){
+                Tag::create($tag);
+            } else {
                 $this->command->info('Kayıt bulunmaktadır.');
             }
         }
