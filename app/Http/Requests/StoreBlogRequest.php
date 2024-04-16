@@ -15,10 +15,10 @@ class StoreBlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id'=>'required|exists:categories,id',
-            'header'=>'required',
-            'desc_short'=>'required',
-            'desc_long'=>'required'
+            // 'category_id'=>'required|exists:categories,id',
+            // 'header'=>'required',
+            // 'desc_short'=>'required',
+            // 'desc_long'=>'required'
         ];
     }
 }

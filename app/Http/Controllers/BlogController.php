@@ -21,7 +21,7 @@ class BlogController extends Controller
         $data['user_id'] = 1;
         $data['deleted_at'] = null;
 
-        $blog = Blog::create($data);
+        Blog::create($data);
 
         return response()->json([
             'S'=>'T',
