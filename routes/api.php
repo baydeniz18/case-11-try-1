@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
-use App\Models\Blog;
+use App\Http\Controllers\LoginController;
+
+Route::post('/register',[LoginController::class,'register']);
 
 Route::post('/add_blog',[BlogController::class,'store']);
 
