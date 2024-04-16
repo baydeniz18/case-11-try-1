@@ -13,6 +13,80 @@ use Illuminate\Support\Carbon;
 class BlogController extends Controller
 {
 
+        /**
+ * @OA\Schema(
+ *     schema="Blog",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         format="int64",
+ *         description="Blog ID"
+ *     ),
+ *     @OA\Property(
+ *         property="category_id",
+ *         type="integer",
+ *         description="Category ID of the blog"
+ *     ),
+ *     @OA\Property(
+ *         property="header",
+ *         type="string",
+ *         description="Header of the blog"
+ *     ),
+ *     @OA\Property(
+ *         property="desc_short",
+ *         type="string",
+ *         description="Short description of the blog"
+ *     ),
+ *     @OA\Property(
+ *         property="desc_long",
+ *         type="string",
+ *         description="Long description of the blog"
+ *     ),
+ *     @OA\Property(
+ *         property="created_at",
+ *         type="string",
+ *         format="date-time",
+ *         description="Date and time when the blog was created"
+ *     ),
+ *     @OA\Property(
+ *         property="updated_at",
+ *         type="string",
+ *         format="date-time",
+ *         description="Date and time when the blog was last updated"
+ *     ),
+ *     @OA\Property(
+ *         property="deleted_at",
+ *         type="string",
+ *         format="date-time",
+ *         nullable=true,
+ *         description="Date and time when the blog was soft deleted"
+ *     )
+ * )
+ *
+
+     * @OA\Get(
+     *     path="/api/blog_list",
+     *     summary="Get all blogs",
+     *     @OA\Parameter(
+     *         name="category_id",
+     *         in="query",
+     *         description="Filter blogs by category ID",
+     *         required=false,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of blogs",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Blog"))
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="No blogs found"
+     *     )
+     * )
+     */
+
+
     public function index(Request $request)
     {
         // return Blog::all();
@@ -22,8 +96,10 @@ class BlogController extends Controller
         $category_id = $request->query('category_id');
 
         if($category_id){
-            $blogs = Blog::where('category_id', $category_id) 
+            $blogs = Blog::where('category_id', $category_id)
             ->whereNull('deleted_at')
+            ->join('categories', 'blogs.category_id', '=', 'categories.id')
+            ->select('blogs.*', 'categories.category_name')
             ->get();
         } else {
             $blogs = Blog::whereNull('deleted_at')
@@ -34,6 +110,7 @@ class BlogController extends Controller
 
         return $blogs;
     }
+
 
     
     public function store(StoreBlogRequest $request)
@@ -53,6 +130,7 @@ class BlogController extends Controller
         ]);
     }
 
+
     public function show($id)
     {
         $blog = Blog::findOrFail($id);
@@ -65,6 +143,7 @@ class BlogController extends Controller
         }
     }
 
+    
 
     public function update(UpdateBlogRequest $request, $id)
     {
@@ -99,7 +178,6 @@ class BlogController extends Controller
         }
 
     }
-
 
     public function destroy($id)
     {
