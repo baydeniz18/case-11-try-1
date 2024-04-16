@@ -358,19 +358,10 @@ class BlogController extends Controller
 
     public function destroy($id)
     {
-        //kaydı delete atmak isteseydik ;
 
+        //delete atılıp , silinen kayıtlar başka bir table'a aktarılabilir.
 
-        //  if ($blog->delete()) {
-        //     return response()->json(['message' => 'Blog başarıyla silindi']);
-        //  } else {
-        //     return response()->json(['message' => 'Blog silinirken bir hata oluştu']);
-        //  }
-
-         // yedek yok o yüzden veriyi tutuyorum 
-
-         // list işlemlerinde gözükmeyecek
-
+        // burada da deleted_blogs adlı table oluşturup oraya insert attıktan sonra delete çalıştırmak gerekir.
 
          $blog = Blog::findOrFail($id);
  
