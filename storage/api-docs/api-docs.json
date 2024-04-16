@@ -16,6 +16,9 @@
     "paths": {
         "/api/blog_list": {
             "get": {
+                "tags": [
+                    "Blogs"
+                ],
                 "summary": "Get all blogs",
                 "operationId": "81e1c9532026a6291ace2552aa8c0cfe",
                 "parameters": [
@@ -49,8 +52,61 @@
                 }
             }
         },
+        "/api/add_blog": {
+            "post": {
+                "tags": [
+                    "Blogs"
+                ],
+                "summary": "Add a new blog",
+                "operationId": "69a47b0a6293dba8df4e2ddc9930fbd7",
+                "requestBody": {
+                    "description": "Blog data",
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "category_id": {
+                                        "description": "Category ID",
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "header": {
+                                        "description": "Blog header",
+                                        "type": "string",
+                                        "example": "güncelleme2"
+                                    },
+                                    "desc_short": {
+                                        "description": "Short description",
+                                        "type": "string",
+                                        "example": "güncelleme2"
+                                    },
+                                    "desc_long": {
+                                        "description": "Long description",
+                                        "type": "string",
+                                        "example": "güncelleme2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Blog added successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
         "/api/register": {
             "post": {
+                "tags": [
+                    "Authentication"
+                ],
                 "summary": "Create a new user",
                 "operationId": "a39949df013c1eb78ff8bd8f481d408a",
                 "requestBody": {
@@ -97,6 +153,9 @@
         },
         "/api/login": {
             "post": {
+                "tags": [
+                    "Authentication"
+                ],
                 "summary": "Authenticate user and generate token",
                 "operationId": "c5e838284c7f343f0e5e5fd589161c96",
                 "requestBody": {

@@ -67,6 +67,7 @@ class BlogController extends Controller
      * @OA\Get(
      *     path="/api/blog_list",
      *     summary="Get all blogs",
+     *     tags={"Blogs"},
      *     @OA\Parameter(
      *         name="category_id",
      *         in="query",
@@ -110,6 +111,55 @@ class BlogController extends Controller
 
         return $blogs;
     }
+
+    /**
+ * @OA\Post(
+ *     path="/api/add_blog",
+ *     summary="Add a new blog",
+ *     tags={"Blogs"},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         description="Blog data",
+ *         @OA\MediaType(
+ *             mediaType="application/x-www-form-urlencoded",
+ *             @OA\Schema(
+ *                 @OA\Property(
+ *                     property="category_id",
+ *                     type="integer",
+ *                     description="Category ID",
+ *                     example="2"
+ *                 ),
+ *                 @OA\Property(
+ *                     property="header",
+ *                     type="string",
+ *                     description="Blog header",
+ *                     example="güncelleme2"
+ *                 ),
+ *                 @OA\Property(
+ *                     property="desc_short",
+ *                     type="string",
+ *                     description="Short description",
+ *                     example="güncelleme2"
+ *                 ),
+ *                 @OA\Property(
+ *                     property="desc_long",
+ *                     type="string",
+ *                     description="Long description",
+ *                     example="güncelleme2"
+ *                 ),
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Blog added successfully"
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Unauthorized"
+ *     )
+ * )
+ */
 
 
     

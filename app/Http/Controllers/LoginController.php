@@ -15,6 +15,7 @@ class LoginController extends Controller
 /**
  * @OA\Post(
  *     path="/api/register",
+ *     tags={"Authentication"},
  *     summary="Create a new user",
  *     @OA\RequestBody(
  *         required=true,
@@ -89,6 +90,7 @@ class LoginController extends Controller
     /**
      * @OA\Post(
      *     path="/api/login",
+     *     tags={"Authentication"},
      *     summary="Authenticate user and generate token",
      *     @OA\RequestBody(
      *         required=true,
