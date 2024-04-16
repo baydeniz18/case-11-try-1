@@ -8,9 +8,7 @@ use App\Http\Requests\UpdateTagRequest;
 
 class TagController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         //
