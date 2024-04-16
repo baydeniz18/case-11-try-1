@@ -13,6 +13,8 @@ class Blog extends Model
         'category_id',
         'header',
         'desc_short',
-        'desc_long'
+        'desc_long',
+        'user_id',
+        'deleted_at'
     ];
 }

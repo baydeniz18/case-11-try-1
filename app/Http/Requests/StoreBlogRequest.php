@@ -14,11 +14,13 @@ class StoreBlogRequest extends FormRequest
 
     public function rules(): array
     {
+
+        //user_id eklemeye gerek yok tokenden alınacak tokensiz bu işlemi de yapamaz.
         return [
-            // 'category_id'=>'required|exists:categories,id',
-            // 'header'=>'required',
-            // 'desc_short'=>'required',
-            // 'desc_long'=>'required'
+            'category_id'=>'required|exists:categories,id',
+            'header'=>'required',
+            'desc_short'=>'required',
+            'desc_long'=>'required'
         ];
     }
 }
