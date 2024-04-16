@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BlogController;
 
 Route::get('/category_list', [CategoryController::class, 'index']);
+Route::post('/add_blog',[BlogController::class,'store']);
 
-Route::get('/api-test', function () {
-    return 'bla';
+Route::group(['prefix' => 'blog'], function () {
+    Route::get('/blog_list', [BlogController::class, 'index']);
+
+    Route::post('/add_blog',[BlogController::class,'store']);
 });
-
