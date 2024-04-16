@@ -2,22 +2,45 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
+
     public function run(): void
     {
-        // User::factory(10)->create();
+        //1. YONTEM
+        // DB::table('categories')->insert(
+        //     ['category_name'=>'Teknoloji']
+        // );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // 2. YONTEM
+
+        $categories = [
+            ['category_name'=>'Teknoloji'],
+            ['category_name'=>'Sağlık'],
+            ['category_name'=>'Eğitim'],
+            ['category_name'=>'Spor']
+        ];
+
+        // VAR KONTROL (firstOrNew)
+
+        foreach ($categories as $category) {
+
+
+            $kayit = Category::firstOrNew($category);
+
+
+            if(!$kayit->exists){
+                Category::create($category);
+            } else {
+                $this->command->info('Kayıt bulunmaktadır.');
+            }
+        }
+
+
     }
 }
